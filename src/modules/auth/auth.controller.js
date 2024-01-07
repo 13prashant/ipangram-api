@@ -1,8 +1,8 @@
 const User = require("../users/users.model");
 const { getSignedJwt } = require("../../services/jwt.service");
+const { comparePassword } = require("../../services/password.service");
 const ErrorResponse = require("../../utils/errorResponse");
 const { COOKIE_EXPIRES_IN } = require("../../utils/constants");
-const { comparePassword } = require("../../services/password.service");
 
 // @desc      Register user
 // @route     POST /api/v1/auth/register
@@ -95,6 +95,9 @@ const sendTokenResponse = (user, statusCode, res) => {
 
   res.status(statusCode).cookie("token", token, options).json({
     success: true,
-    token,
+    data: {
+      user,
+      token,
+    },
   });
 };

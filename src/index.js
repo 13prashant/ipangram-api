@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const express = require("express");
+const cors = require("cors");
 const { connectDB } = require("./services/db.service");
 // Routes
 const authRoutes = require("./modules/auth/auth.routes");
@@ -14,6 +15,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (_, res) => {
   res.send("Welcome to ipangram API");
