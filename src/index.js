@@ -2,9 +2,11 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const { connectDB } = require("./services/db.service");
+const { errorHandler } = require("./middlewares/error.middleware");
 // Routes
 const authRoutes = require("./modules/auth/auth.routes");
-const { errorHandler } = require("./middlewares/error.middleware");
+const usersRoutes = require("./modules/users/users.routes");
+const departmentsRoutes = require("./modules/departments/departments.routes");
 
 // Load env vars
 dotenv.config();
@@ -23,6 +25,8 @@ app.get("/", (_, res) => {
 
 // Mount routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/departments", departmentsRoutes);
 
 app.use(errorHandler);
 
