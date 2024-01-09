@@ -6,3 +6,7 @@ exports.getSignedJwt = (doc) => {
     expiresIn: JWT_EXPIRES_IN,
   });
 };
+
+exports.verifyJwt = (token) => {
+  return jwt.verify(token, process.env.JWT_SECRET);
+};
